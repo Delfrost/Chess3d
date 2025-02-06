@@ -133,7 +133,7 @@ def main():
 
         draw_board(win)
         if selected_piece:
-            valid_moves = selected_piece.valid_moves(selected_pos, board)
+            valid_moves = selected_piece.valid_moves(selected_pos , board)
             highlight_moves(win, valid_moves, board, selected_piece)
         draw_pieces(win, board, pieces)
         if is_game_over(board):
