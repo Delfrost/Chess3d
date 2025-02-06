@@ -204,6 +204,8 @@ def main():
 
     # Create an instance of Rules to check for check
     rules = Rules()
+    checkmate=False
+    font = pygame.font.SysFont(None, 75)
 
     running = True
     while running:
@@ -246,12 +248,21 @@ def main():
             elif event.type == pygame.KEYDOWN:
                 if event.key == pygame.K_r:  # Press 'R' to reset the game
                     selected_piece, selected_pos, turn = reset_board(board)
+                    checkmate = False
+                elif event.key == pygame.K_z:  # Press 'Z' to display checkmate
+                    checkmate = True
+                    
 
         draw_board(win)
         if selected_piece:
             valid_moves = selected_piece.valid_moves(selected_pos, board)
             highlight_moves(win, valid_moves, board, selected_piece, find_king(board, selected_piece.color), turn)
         draw_pieces(win, board, pieces)
+
+        if checkmate:
+            checkmate_text = font.render("Checkmate!", True, (255, 0, 0))  # Red color
+            win.blit(checkmate_text, (WIDTH // 2 - checkmate_text.get_width() // 2, HEIGHT // 2 - checkmate_text.get_height() // 2))
+
         if is_game_over(board):
             print("Game Over")
             running = False

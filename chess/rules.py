@@ -2,8 +2,8 @@ from chess.board import Board
 from chess.pieces import Rook, Bishop, Queen, King, Knight, Pawn
 
 class Rules:
-    @staticmethod
-    # Inside rules.py
+   
+    
 
     @staticmethod
     def is_check(board, king_position, color):
@@ -25,7 +25,7 @@ class Rules:
         if not Rules.is_check(board, king_position, color):
             return False
         
-        # Check if the king can escape the check
+        
         row, col = king_position
         for dr, dc in [(-1, -1), (-1, 0), (-1, 1), (0, -1), (0, 1), (1, -1), (1, 0), (1, 1)]:
             r, c = row + dr, col + dc
@@ -36,7 +36,7 @@ class Rules:
                     if not Rules.is_check(board, (r, c), color):
                         return False
 
-        # Check if any other piece can block the check or capture the attacking piece
+        
         for r in range(8):
             for c in range(8):
                 piece = board.board[r][c]
