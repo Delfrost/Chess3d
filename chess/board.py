@@ -2,16 +2,13 @@ from chess.pieces import Pawn, Rook, Knight, Bishop, Queen, King
 
 class Board:
     def __init__(self):
-      
-      self.board = [[None] * 8 for _ in range(8)]  # 8x8 board initialized with None
+        self.board = [[None] * 8 for _ in range(8)]
 
     def reset(self):
-        """Reset the board and pieces to their initial state."""
-        self.board = [[None for _ in range(8)] for _ in range(8)]  # Clear the board
-        self.setup()  # Set up initial positions
+        self.board = [[None for _ in range(8)] for _ in range(8)]
+        self.setup()
 
     def setup(self):
-        """Set up the initial chess positions."""
         for col in range(8):
             self.board[1][col] = Pawn("black")
             self.board[6][col] = Pawn("white")
@@ -50,21 +47,18 @@ class Board:
         self.board[start_row][start_col] = None
 
     def _convert_position(self, pos):
-        col = ord(pos[0].lower()) - ord('a')  # Convert 'a'-'h' to 0-7
-        row = 8 - int(pos[1])  # Convert '1'-'8' to 7-0
+        col = ord(pos[0].lower()) - ord('a')
+        row = 8 - int(pos[1])
         return row, col
 
     def get_piece(self, position):
-        """Returns the piece at the given (row, col) position or None if empty."""
         row, col = position
         return self.board[row][col]
-    
+
     def move_piece(self, start, end):
         piece = self.board[start[0]][start[1]]
         self.board[end[0]][end[1]] = piece
         self.board[start[0]][start[1]] = None
-
-
 
     def find_king(self, color):
         for row in range(8):
@@ -73,8 +67,3 @@ class Board:
                 if isinstance(piece, King) and piece.color == color:
                     return (row, col)
         return None
-
-    
-
-    # Other necessary methods to display and manipulate the board
-
